@@ -1,4 +1,4 @@
-# EXNO:4-DS
+<img width="1218" height="530" alt="image" src="https://github.com/user-attachments/assets/d6cf8e1d-5f68-4831-b43a-7263bba844e0" /># EXNO:4-DS
 # AIM:
 To read the given data and perform Feature Scaling and Feature Selection process and save the
 data to a file.
@@ -256,28 +256,49 @@ df[categorical_columns]
  print(selected_features_anova)
 ```
 <img width="1054" height="85" alt="image" src="https://github.com/user-attachments/assets/50bb789f-6a11-44a9-a144-f141e7f3aee1" />
+```
+# Wrapper Method
+import pandas as pd
+from sklearn.feature_selection import RFE
+from sklearn.linear_model import LogisticRegression
+df = pd.read_csv("/content/income(1) (1).csv", engine='python', on_bad_lines='skip')
+
+# List of categorical columns
+categorical_columns = [
+    'JobType',
+    'EdType',
+    'maritalstatus',
+    'occupation',
+    'relationship',
+    'race',
+    'gender',
+    'nativecountry'
+]
+
+existing_cols = [col for col in categorical_columns if col in df.columns]
+df[existing_cols] = df[existing_cols].astype('category')
+```
 
 ```
- # Wrapper Method
- import pandas as pd
- from sklearn.feature_selection import RFE
- from sklearn.linear_model import LogisticRegression
- df=pd.read_csv("/content/income(1) (1).csv")
- # List of categorical columns
- categorical_columns = [
- 'JobType',
- 'EdType',
- 'maritalstatus',
- 'occupation',
- 'relationship',
- 'race',
- 'gender',
- 'nativecountry'
- ]
- # Convert the categorical columns to category dtype
- df[categorical_columns] = df[categorical_columns].astype('category')
+ df[categorical_columns] = df[categorical_columns].apply(lambda x: x.cat.codes)
+```
 
 ```
+ df[categorical_columns]
+```
+
+<img width="1218" height="530" alt="image" src="https://github.com/user-attachments/assets/a799a119-e828-4bcd-9bc8-9e2ee5fc8a97" />
+
+```
+ X = df.drop(columns=['SalStat'])
+ y = df['SalStat']
+```
+
+```
+
+```
+
+
 
 
 
